@@ -5,7 +5,7 @@ const app = express();
 
 
 app.use((req,res)=>{
-    res.send("Hello from the express servewwr");
+    res.send("Hello from the express js server");
 })
 
 app.listen(4000,()=>{
