@@ -52,6 +52,34 @@ app.get("/getUser", async (req, res) => {
     }
 })
 
+
+
+app.delete("/deleteUser",async (req,res)=>{
+    try {
+        const userId = req.body.userId;
+        const deletedUser = await User.findByIdAndDelete(userId)
+        if(!deletedUser){
+            res.status(400).send("USer not found");
+        }else{
+            res.send("USer deleted successfully")
+        }
+    } catch (error) {
+               res.status(500).send("Error" + err.message);
+    }
+})
+
+
+app.patch("/updateUser",async (req,res)=>{
+    const userId = req.body.userId;
+    const data = req.body;
+    try {
+       await User.findByIdAndUpdate(userId,data);
+        res.send("user updated successfully");
+    } catch (error) {
+         res.status(500).send("Error" + err.message);
+    }
+})
+
 connectDB().then(() => {
     console.log("Database connected succesfully")
     app.listen(7777, () => {
